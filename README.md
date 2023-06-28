@@ -1,2 +1,4 @@
 # Weightless
-Young Eienstein 2023
+Young Einstein 2023
+
+This project is about creating a game
