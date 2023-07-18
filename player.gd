@@ -45,11 +45,12 @@ func _physics_process(delta):
 
 
 func _on_level_player_pick_return(ok_status, weight):
-	print(ok_status)
-	if ok_status and not weight_amount >= 2:
+	print(ok_status, ' ', weight)
+	if weight != null and not weight_amount >= 2:
 		level.remove_child(weight)
 		weight_amount += 1
-	elif weight_amount == 1:
+	elif weight_amount == 2:
+		var ref_weight = weight_instance
 		weight_instance.position = position
 		weight_amount -= 1
 		level.add_child(weight_instance)
