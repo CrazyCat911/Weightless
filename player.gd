@@ -4,11 +4,9 @@ extends CharacterBody2D
 @export var SPEED : float = 225.0
 @export var JUMP_VELOCITY : float = -300.0
 @onready var level = get_parent()
-@onready var weight_instance = load("res://Weight/Weight.tscn").instantiate()
 var starting_pos : Vector2
 var weight_amount : int = 0
 signal death
-signal pick_check
 
 
 func _ready():
@@ -39,18 +37,6 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 		if Input.is_action_just_pressed("intereact"):
-			emit_signal("pick_check")
+			pass
 		
 		move_and_slide()
-
-
-func _on_level_player_pick_return(ok_status, weight):
-	print(ok_status, ' ', weight)
-	if weight != null and not weight_amount >= 2:
-		level.remove_child(weight)
-		weight_amount += 1
-	elif weight_amount == 2:
-		var ref_weight = weight_instance
-		weight_instance.position = position
-		weight_amount -= 1
-		level.add_child(weight_instance)

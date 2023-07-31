@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://oif0i13jyion"]
+[gd_scene load_steps=13 format=3 uid="uid://oif0i13jyion"]
 
-[ext_resource type="Script" path="res://Levels/level.gd" id="1_hxls1"]
 [ext_resource type="PackedScene" uid="uid://xsd52y6q7lv2" path="res://Art/parallax_background.tscn" id="1_lok37"]
 [ext_resource type="Texture2D" uid="uid://dm0ennnaayvdl" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
 [ext_resource type="PackedScene" uid="uid://btlbjvx383yfa" path="res://player.tscn" id="2_5upcm"]
@@ -2855,7 +2854,6 @@ physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_bk4l8")
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_hxls1")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_lok37")]
 
@@ -2922,6 +2920,3 @@ rotation = -0.144862
 energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
-
-[connection signal="player_pick_return" from="." to="Player" method="_on_level_player_pick_return"]
-[connection signal="pick_check" from="Player" to="." method="_on_player_pick_check"]
