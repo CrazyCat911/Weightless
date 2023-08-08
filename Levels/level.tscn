@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oif0i13jyion"]
+[gd_scene load_steps=15 format=3 uid="uid://oif0i13jyion"]
 
 [ext_resource type="PackedScene" uid="uid://xsd52y6q7lv2" path="res://Art/parallax_background.tscn" id="1_lok37"]
 [ext_resource type="Texture2D" uid="uid://dm0ennnaayvdl" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://clf60v2ofjf5k" path="res://Art/UI/Doomed_Font/doomed.ttf" id="2_ispxq"]
 [ext_resource type="PackedScene" uid="uid://cbadc84237tvy" path="res://button.tscn" id="5_dhy8p"]
 [ext_resource type="PackedScene" uid="uid://c4bxbggyyao3x" path="res://Weight/Weight.tscn" id="6_nfvpd"]
+[ext_resource type="PackedScene" uid="uid://go6axnc58vlu" path="res://Weight/weight_area2d.tscn" id="7_cdggf"]
+[ext_resource type="Script" path="res://Weight/weight_area2d.gd" id="8_x1opa"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0mgi1"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -2920,3 +2922,8 @@ rotation = -0.144862
 energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
+
+[node name="WeightArea" parent="." instance=ExtResource("7_cdggf")]
+script = ExtResource("8_x1opa")
+
+[connection signal="player_return" from="WeightArea" to="Player" method="_on_weight_area_player_return"]
