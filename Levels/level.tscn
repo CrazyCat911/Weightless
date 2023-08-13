@@ -2923,7 +2923,9 @@ energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
 
-[node name="WeightArea" parent="." instance=ExtResource("7_cdggf")]
+[node name="We!ghtArea" parent="." instance=ExtResource("7_cdggf")]
+position = Vector2(-208, -134)
 script = ExtResource("8_x1opa")
 
-[connection signal="player_return" from="WeightArea" to="Player" method="_on_weight_area_player_return"]
+[connection signal="finish_weight" from="Player" to="Player" method="_on_finish_weight"]
+[connection signal="player_return" from="We!ghtArea" to="Player" method="_on_weight_area_player_return"]

@@ -8,5 +8,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(overlaps_body(get_parent().get_node("Player")))
+	#print(overlaps_body(get_parent().get_node("Player")))
 	emit_signal("player_return", overlaps_body(get_parent().get_node("Player")))
