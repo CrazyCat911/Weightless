@@ -1,13 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://oif0i13jyion"]
+[gd_scene load_steps=13 format=3 uid="uid://oif0i13jyion"]
 
 [ext_resource type="PackedScene" uid="uid://xsd52y6q7lv2" path="res://Art/parallax_background.tscn" id="1_lok37"]
 [ext_resource type="Texture2D" uid="uid://dm0ennnaayvdl" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
 [ext_resource type="PackedScene" uid="uid://btlbjvx383yfa" path="res://player.tscn" id="2_5upcm"]
 [ext_resource type="FontFile" uid="uid://clf60v2ofjf5k" path="res://Art/UI/Doomed_Font/doomed.ttf" id="2_ispxq"]
-[ext_resource type="PackedScene" uid="uid://cbadc84237tvy" path="res://button.tscn" id="5_dhy8p"]
 [ext_resource type="PackedScene" uid="uid://c4bxbggyyao3x" path="res://Weight/Weight.tscn" id="6_nfvpd"]
-[ext_resource type="PackedScene" uid="uid://go6axnc58vlu" path="res://Weight/weight_area2d.tscn" id="7_cdggf"]
-[ext_resource type="Script" path="res://Weight/weight_area2d.gd" id="8_x1opa"]
+[ext_resource type="PackedScene" uid="uid://dwuil8olkhq36" path="res://Weight/weight_area2d.tscn" id="6_phmnm"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0mgi1"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -2905,27 +2903,21 @@ theme_override_fonts/font = ExtResource("2_ispxq")
 text = "Sorry didn't
 make this bit yet"
 
-[node name="Button" parent="." instance=ExtResource("5_dhy8p")]
-position = Vector2(232, 88)
-
 [node name="Weight" parent="." instance=ExtResource("6_nfvpd")]
 position = Vector2(43, 84)
+
+[node name="weightArea" parent="Weight" instance=ExtResource("6_phmnm")]
 
 [node name="Weight2" parent="." instance=ExtResource("6_nfvpd")]
 position = Vector2(113, 67)
 
+[node name="weightArea" parent="Weight2" instance=ExtResource("6_phmnm")]
+
 [node name="Player" parent="." instance=ExtResource("2_5upcm")]
-position = Vector2(-317, 57)
+position = Vector2(-347, -185)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 rotation = -0.144862
 energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
-
-[node name="We!ghtArea" parent="." instance=ExtResource("7_cdggf")]
-position = Vector2(-208, -134)
-script = ExtResource("8_x1opa")
-
-[connection signal="finish_weight" from="Player" to="Player" method="_on_finish_weight"]
-[connection signal="player_return" from="We!ghtArea" to="Player" method="_on_weight_area_player_return"]
