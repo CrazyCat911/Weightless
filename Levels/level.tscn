@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://oif0i13jyion"]
+[gd_scene load_steps=14 format=3 uid="uid://oif0i13jyion"]
 
 [ext_resource type="PackedScene" uid="uid://xsd52y6q7lv2" path="res://Art/parallax_background.tscn" id="1_lok37"]
 [ext_resource type="Texture2D" uid="uid://dm0ennnaayvdl" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
 [ext_resource type="PackedScene" uid="uid://btlbjvx383yfa" path="res://player.tscn" id="2_5upcm"]
 [ext_resource type="FontFile" uid="uid://clf60v2ofjf5k" path="res://Art/UI/Doomed_Font/doomed.ttf" id="2_ispxq"]
 [ext_resource type="PackedScene" uid="uid://c4bxbggyyao3x" path="res://Weight/Weight.tscn" id="6_nfvpd"]
-[ext_resource type="PackedScene" uid="uid://dwuil8olkhq36" path="res://Weight/weight_area2d.tscn" id="6_phmnm"]
+[ext_resource type="Script" path="res://PlayerArea2D.gd" id="6_o1npf"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0mgi1"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -2853,6 +2853,10 @@ physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_bk4l8")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8kxc"]
+radius = 14.5
+height = 46.0
+
 [node name="Level" type="Node2D"]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_lok37")]
@@ -2906,18 +2910,25 @@ make this bit yet"
 [node name="Weight" parent="." instance=ExtResource("6_nfvpd")]
 position = Vector2(43, 84)
 
-[node name="weightArea" parent="Weight" instance=ExtResource("6_phmnm")]
-
 [node name="Weight2" parent="." instance=ExtResource("6_nfvpd")]
 position = Vector2(113, 67)
 
-[node name="weightArea" parent="Weight2" instance=ExtResource("6_phmnm")]
-
 [node name="Player" parent="." instance=ExtResource("2_5upcm")]
-position = Vector2(-347, -185)
+position = Vector2(-346, 68)
+
+[node name="Area2D" type="Area2D" parent="Player"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("6_o1npf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(0.5, 1)
+shape = SubResource("CapsuleShape2D_c8kxc")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 rotation = -0.144862
 energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
+
+[connection signal="weight_touch" from="Player/Area2D" to="Player" method="_on_area_2d_weight_touch"]

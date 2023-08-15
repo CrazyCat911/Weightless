@@ -14,26 +14,12 @@ var weight
 
 func _ready():
 	starting_pos = position
-	
-	weights = []
-	for object in level.get_children():
-		#print(object)
-		if "Weight" in object.name:
-			#print("yup, weight")
-			weights.append(object)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _physics_process(delta):
-	weights = []
-	for object in level.get_children():
-		#print(object)
-		if "Weight" in object.name:
-			#print("yup, weight")
-			weights.append(object)
-	
 	$Label.text = str(weight_amount)
 	if position.y >= 500:
 		position = starting_pos
@@ -53,4 +39,17 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
+		if Input.is_action_just_pressed("drop") and weight_amount > 0:
+			var temp_weight = load("res://Weight/Weight.tscn").instantiate()
+			temp_weight.name = "Weight"
+			temp_weight.position = position
+			level.add_child(temp_weight)
+			weight_amount -= 1
+		
 		move_and_slide()
+
+
+func _on_area_2d_weight_touch(weight):
+	if Input.is_action_just_pressed("pickup"):
+		weight.queue_free()
+		weight_amount += 1
