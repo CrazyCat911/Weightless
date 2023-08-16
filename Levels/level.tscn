@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://oif0i13jyion"]
+[gd_scene load_steps=16 format=3 uid="uid://oif0i13jyion"]
 
 [ext_resource type="PackedScene" uid="uid://xsd52y6q7lv2" path="res://Art/parallax_background.tscn" id="1_lok37"]
 [ext_resource type="Texture2D" uid="uid://b8t17rwss43aq" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cffpt4d3w81v5" path="res://Art/UI/Doomed_Font/doomed.ttf" id="2_ispxq"]
 [ext_resource type="PackedScene" uid="uid://c4bxbggyyao3x" path="res://Weight/Weight.tscn" id="6_nfvpd"]
 [ext_resource type="Script" path="res://PlayerArea2D.gd" id="6_o1npf"]
+[ext_resource type="Script" path="res://Levels/End.gd" id="7_5t1oe"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0mgi1"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -2857,6 +2858,10 @@ sources/0 = SubResource("TileSetAtlasSource_bk4l8")
 radius = 14.5
 height = 46.0
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a07he"]
+normal = Vector2(-1, 0)
+distance = 33.99
+
 [node name="Level" type="Node2D"]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_lok37")]
@@ -2904,17 +2909,17 @@ offset_top = 96.0
 offset_right = 496.0
 offset_bottom = 148.0
 theme_override_fonts/font = ExtResource("2_ispxq")
-text = "Sorry didn't
-make this bit yet"
+text = "The end"
+horizontal_alignment = 2
 
 [node name="Weight" parent="." instance=ExtResource("6_nfvpd")]
-position = Vector2(43, 84)
+position = Vector2(-54, 9)
 
 [node name="Weight2" parent="." instance=ExtResource("6_nfvpd")]
-position = Vector2(113, 67)
+position = Vector2(4, -14)
 
 [node name="Weight3" parent="." instance=ExtResource("6_nfvpd")]
-position = Vector2(175, 66)
+position = Vector2(-50, -26)
 
 [node name="Player" parent="." instance=ExtResource("2_5upcm")]
 position = Vector2(-346, 68)
@@ -2934,4 +2939,12 @@ energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
 
+[node name="End" type="Area2D" parent="."]
+script = ExtResource("7_5t1oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
+position = Vector2(464, 25)
+shape = SubResource("WorldBoundaryShape2D_a07he")
+
 [connection signal="weight_touch" from="Player/Area2D" to="Player" method="_on_area_2d_weight_touch"]
+[connection signal="endoflevel" from="End" to="Player" method="_on_endoflevel"]
