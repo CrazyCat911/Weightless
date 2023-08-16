@@ -10,6 +10,7 @@ var weight_amount : int = 0
 signal death
 var weights
 var weight
+var loaded_weights : int = 3
 
 
 func _ready():
@@ -21,6 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	$Label.text = str(weight_amount)
+	
 	if position.y >= 500:
 		position = starting_pos
 		emit_signal("death")
@@ -41,15 +43,17 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("drop") and weight_amount > 0:
 			var temp_weight = load("res://Weight/Weight.tscn").instantiate()
-			temp_weight.name = "Weight"
+			temp_weight.name = "Weight" + str(loaded_weights)
 			temp_weight.position = position
 			level.add_child(temp_weight)
+			loaded_weights += 1
 			weight_amount -= 1
 		
 		move_and_slide()
 
 
 func _on_area_2d_weight_touch(weight):
-	if Input.is_action_just_pressed("pickup"):
+	if Input.is_action_just_pressed("pickup") and weight_amount < 2:
 		weight.queue_free()
 		weight_amount += 1
+		loaded_weights -= 1
