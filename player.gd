@@ -60,4 +60,3 @@ func _on_area_2d_weight_touch(weight):
 
 func _on_endoflevel():
 	$Label.text = "Well done!"
-	level.queue_free()
