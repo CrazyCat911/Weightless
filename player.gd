@@ -4,7 +4,7 @@ extends CharacterBody2D
 var SPEED : float = 225.0
 var JUMP_VELOCITY_0 : float = -300.0
 var JUMP_VELOCITY_1 : float = -250.0
-var JUMP_VELOCITY_2 : float = 0.0
+var JUMP_VELOCITY_2 : float = -75.0
 
 @onready var level = get_parent()
 @onready var player = level.get_node("Player")
@@ -63,7 +63,13 @@ func _on_area_2d_weight_touch(weight):
 	if Input.is_action_just_pressed("pickup") and weight_amount < 2:
 		weight.queue_free()
 		weight_amount += 1
+		if velocity.y > 0:
+			velocity.y = 0
 
 
 func _on_endoflevel():
-	$Label.text = "Well done!"
+	if weight_amount == 2:
+		$Label.text = "Well done!"
+	else:
+		$Label.text = "Not enough\nweight"
+ 
