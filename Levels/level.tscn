@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://oif0i13jyion"]
 
 [ext_resource type="PackedScene" uid="uid://xsd52y6q7lv2" path="res://Art/parallax_background.tscn" id="1_lok37"]
-[ext_resource type="Texture2D" uid="uid://b8t17rwss43aq" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
+[ext_resource type="Texture2D" uid="uid://dm0ennnaayvdl" path="res://Art/Cave_Assets/mainlev_build.png" id="1_rjoie"]
 [ext_resource type="PackedScene" uid="uid://btlbjvx383yfa" path="res://player.tscn" id="2_5upcm"]
-[ext_resource type="FontFile" uid="uid://cffpt4d3w81v5" path="res://Art/UI/Doomed_Font/doomed.ttf" id="2_ispxq"]
+[ext_resource type="FontFile" uid="uid://clf60v2ofjf5k" path="res://Art/UI/Doomed_Font/doomed.ttf" id="2_ispxq"]
 [ext_resource type="PackedScene" uid="uid://c4bxbggyyao3x" path="res://Weight/Weight.tscn" id="6_nfvpd"]
 [ext_resource type="Script" path="res://PlayerArea2D.gd" id="6_o1npf"]
 [ext_resource type="Script" path="res://Levels/End.gd" id="7_5t1oe"]

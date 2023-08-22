@@ -1,15 +1,17 @@
 extends CharacterBody2D
 
 
-@export var SPEED : float = 225.0
-@export var JUMP_VELOCITY : float = -300.0
+var SPEED : float = 225.0
+var JUMP_VELOCITY_0 : float = -300.0
+var JUMP_VELOCITY_1 : float = -250.0
+var JUMP_VELOCITY_2 : float = 0.0
+
 @onready var level = get_parent()
 @onready var player = level.get_node("Player")
 var starting_pos : Vector2
 var weight_amount : int = 0
 signal death
 var weights
-var weight
 var loaded_weights : int = 3
 
 
@@ -33,7 +35,12 @@ func _physics_process(delta):
 	
 		# Handle Jump.
 		if Input.is_action_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
+			if weight_amount == 0:
+				velocity.y = JUMP_VELOCITY_0
+			elif weight_amount == 1:
+				velocity.y = JUMP_VELOCITY_1
+			elif weight_amount == 2:
+				velocity.y = JUMP_VELOCITY_2
 	
 		var direction = Input.get_axis("left", "right")
 		if direction:
@@ -60,4 +67,3 @@ func _on_area_2d_weight_touch(weight):
 
 func _on_endoflevel():
 	$Label.text = "Well done!"
-	level.queue_free()
