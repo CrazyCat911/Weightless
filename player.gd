@@ -63,7 +63,7 @@ func _on_area_2d_weight_touch(weight):
 	if Input.is_action_just_pressed("pickup") and weight_amount < 2:
 		weight.queue_free()
 		weight_amount += 1
-		if velocity.y > 0:
+		if velocity.y < 0:
 			velocity.y = 0
 
 
